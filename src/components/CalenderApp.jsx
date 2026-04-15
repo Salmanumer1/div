@@ -4,14 +4,18 @@ function CalendarApp() {
   const [date, setDate] = useState(new Date());
   const [selectedDay,setselectedDay]=useState()
   const [Event,setEvent]=useState("none")
-  const [Color,setColor]=useState(false)
+  const [Color,setactiveColor]=useState(null)
 
   const [Task,setTask]=useState({})
 useEffect(()=>{
-  return ()=>{
+  
+    
     alert("Event Added")
-  }
+    
+  
 },[Task])
+
+
   const nextMonth = () => {
     setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
   };
@@ -41,13 +45,13 @@ useEffect(()=>{
     <div>
       <h2>Calendar</h2>
 
-      <button onClick={prevMonth}>Prev</button>
+      <button className="btn btn-warning mx-3" onClick={prevMonth}>Prev</button>
       <span>
         {date.toLocaleString("default", { month: "long" })} {year}
       </span>
-      <button onClick={nextMonth}>Next</button>
+      <button  className="btn btn-warning mx-3" onClick={nextMonth}>Next</button>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)",}}>
         {days.map((day, index) => {
           const today = new Date();
 
@@ -56,7 +60,7 @@ useEffect(()=>{
             month === today.getMonth() &&
             year === today.getFullYear();
 const fullDate = `${year}-${month}-${day}`;
-const rem=false;
+
           return (
             <div
              
@@ -65,32 +69,33 @@ const rem=false;
                 padding: "10px",
                 border: "1px solid #ccc",
                 background: isToday ? "lightblue" : "white",
+                color:Task[fullDate] ? "blue":"black"
                
               }}
               
-            onClick={() => {setselectedDay(day);setColor(false)}}
+            onClick={() => {setselectedDay(day)}}
             >
-              {day}{selectedDay === day && selectedDay!== null && <div style={{ background:Color? "green":"red",
+              {day}{selectedDay === day && selectedDay!== null && <div style={{ background:Task[fullDate] ? "green":"red",
               
-               }}>
-                <input type="text" name="" id="" onChange={(e)=>{setEvent(e.target.value)}}/>
-    <button
+               }} >
+                <input className="form-control me-2 my-3" type="text" name="" id="" onChange={(e)=>{setEvent(e.target.value)}}/>
+    <button className="btn btn-warning my-2 mx-2"
           onClick={() =>{
             setTask(prev => ({
               ...prev,
               [fullDate]: Event,
             
             }))
-            ;setColor(true)}
+ ;setactiveColor(day)}}
            
             
-          }
+          
         >
           Add Event
         </button>
       
 
-      {Task[fullDate] && <p>{Task[fullDate]}</p>}
+      {Task[fullDate] && <h5>{Task[fullDate]}</h5>}
     
   </div>
     }
