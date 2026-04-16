@@ -4,6 +4,7 @@ import TextBox from './components/TextBox';
 import About from './components/About';
 import CalendarApp from "./components/CalenderApp";
 import Home from "./components/Home";
+import Calender from "./components/Calender";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/TextBox" element={<TextBox/>} />
           <Route path="/about" element={<About />} />
           <Route path="/CalenderApp" element={<CalendarApp/>}/>
+          <Route path="Calender" element={<Calender/>}/>
         </Routes>
       </div>
     </BrowserRouter>

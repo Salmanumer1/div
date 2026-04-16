@@ -1,14 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect,useRef } from 'react'
 import Calendar from 'react-calendar'
 import './style.css'
+import Calender from './Calender';
 
 
 import 'react-calendar/dist/Calendar.css';
 
 
 export default function Home() {
-    const [EventName, setEventName]=useState("");
+ 
+const [EventName, setEventName]=useState("");
 const [EventCard, setEventCard]=useState([]);
+const[selectDate,setSelectDate]=useState();
+const[Time,setTime]=useState();
+
+ const EventCardRef = useRef([]);
+
+  useEffect(() => {
+    EventCardRef.current = EventCard;
+  }, [EventCard]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const currentTime = `${hours}:${minutes}`;
+
+      EventCardRef.current.forEach(eve => {
+        console.log("eve.time:", eve.time);
+        console.log("currentTime:", currentTime);
+        if (eve.time === currentTime && !eve.triggered) {
+        eve.triggered = true;
+      
+        alert(`You have an event: ${eve.name}`);
+          setEventCard(EventCard.splice(_,0));
+      }
+      });
+
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
   return (
   <div className="container">
     <div className="right-panel">
@@ -26,16 +61,22 @@ const [EventCard, setEventCard]=useState([]);
         </li>
       </ul>
     </div>
+    <div className="container">
 
-        <Calendar />
+    </div>
+        <Calendar  onClickDay={(date)=>{setSelectDate(date.toLocaleDateString() );}} />
+
       <div className='card'>
         <h4>Events</h4>
   {EventCard.map((eve, index) => (
     <div className="card-body" key={index}>
-      <h5 className="card-title">{eve}</h5>
-      <p className="card-text">{eve} is held on Date and Time</p>
-      <a href="#" className="btn btn-warning">Delete</a>
+      <h5 className="card-title">{eve.name}</h5>
+      <p className="card-text">{eve.name} is on {selectDate} and {eve.time}</p>
+      <button href="#" className="btn btn-warning" onClick={() => {
+  setEventCard(prev => prev.filter((_, i) => i !== index))}}>Delete</button>
+ 
     </div>
+     
   ))}
   
     
@@ -53,16 +94,20 @@ const [EventCard, setEventCard]=useState([]);
   </div>
   <div class="col-12">
     <label for="inputAddress2" class="form-label">Date</label>
-    <input type="text" class="form-control"  placeholder="Enter Date"/>
+    <input type="text" class="form-control"  placeholder="Enter Date" value={selectDate} onChange={(e)=>{setSelectDate(e.target.value)}}/>
   </div>
   <div class="col-12">
     <label for="inputCity" class="form-label">Time</label>
-    <input type="text" class="form-control"  placeholder='Enter time'/>
+    <input type="time" class="form-control"  placeholder='Enter time' onChange={(e)=>{setTime(e.target.value)}}/>
   </div>
  
   <div class="col-md-12">
     <button type="button"class="btn btn-warning" onClick={()=>{
-    setEventCard([...EventCard,EventName]);
+    setEventCard(prev => [...prev, {
+  id: selectDate,
+  name: EventName,
+  date: selectDate,
+  time:Time}]);
 }} style={{  width: "100%"}}>Save</button>
   </div>
 </form>
@@ -71,4 +116,4 @@ const [EventCard, setEventCard]=useState([]);
 
 
     )
-}
+  }
