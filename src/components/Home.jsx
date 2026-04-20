@@ -1,7 +1,10 @@
 import React, { useState,useEffect,useRef } from 'react'
+import { useContext } from "react";
+import { EventContext } from "./EventContext.jsx";
 import Calendar from 'react-calendar'
 import './style.css'
 import Calender from './Calender';
+
 
 
 import 'react-calendar/dist/Calendar.css';
@@ -10,7 +13,7 @@ import 'react-calendar/dist/Calendar.css';
 export default function Home() {
  
 const [EventName, setEventName]=useState("");
-const [EventCard, setEventCard]=useState([]);
+const { EventCard, setEventCard } = useContext(EventContext);
 const[selectDate,setSelectDate]=useState();
 const[Time,setTime]=useState();
 
@@ -20,29 +23,24 @@ const[Time,setTime]=useState();
     EventCardRef.current = EventCard;
   }, [EventCard]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, "0");
-      const minutes = String(now.getMinutes()).padStart(2, "0");
-      const currentTime = `${hours}:${minutes}`;
+ useEffect(() => 
+  { const interval = setInterval(() =>
+     { const now = new Date(); 
+      const date=new Date().toLocaleDateString();
+       const hours = String(now.getHours()).padStart(2, "0");
+       const minutes = String(now.getMinutes()).padStart(2, "0"); 
+       const currentTime = `${hours}:${minutes}`; 
+       EventCardRef.current.forEach(eve => 
+        { console.log("eve.time:", eve.time); 
+          console.log("currentTime:", currentTime); 
+          if (eve.time === currentTime && eve.date===date && !eve.triggered) 
+            { eve.triggered = true; 
+              alert(`You have an event: ${eve.name}`); 
+            } });
+           }, 10000);
 
-      EventCardRef.current.forEach(eve => {
-        console.log("eve.time:", eve.time);
-        console.log("currentTime:", currentTime);
-        if (eve.time === currentTime && !eve.triggered) {
-        eve.triggered = true;
-      
-        alert(`You have an event: ${eve.name}`);
-          setEventCard(EventCard.splice(_,0));
-      }
-      });
-
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
+  return () => clearInterval(interval);
+}, [setEventCard]);
 
   return (
   <div className="container">
@@ -53,7 +51,7 @@ const[Time,setTime]=useState();
         </li>
         
          <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/" style={{color:"white"}} ><ion-icon className="mx-2"name="alert-circle-outline"></ion-icon>Alert</a>
+          <a className="nav-link active" aria-current="page" href="/Alert" style={{color:"white"}} ><ion-icon className="mx-2"name="alert-circle-outline"></ion-icon>Alert</a>
         </li>
 
          <li className="nav-item">
@@ -102,12 +100,20 @@ const[Time,setTime]=useState();
   </div>
  
   <div class="col-md-12">
-    <button type="button"class="btn btn-warning" onClick={()=>{
-    setEventCard(prev => [...prev, {
-  id: selectDate,
-  name: EventName,
-  date: selectDate,
-  time:Time}]);
+    <button type="button"class="btn btn-warning" onClick={() => {
+  const newEvent = {
+    id: Date.now(),
+    name: EventName,
+    date: selectDate,
+    time: Time,
+    triggered: false
+  };
+
+  setEventCard(prev => {
+    const updated = [...prev, newEvent];
+    
+    return updated;
+  });
 }} style={{  width: "100%"}}>Save</button>
   </div>
 </form>
