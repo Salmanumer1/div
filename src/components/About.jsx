@@ -25,10 +25,10 @@ setbtntxt("Enable Light Mode")
   return (
     <>
     <div className="container" style={mySty}>
-      <h2>About Us</h2>
+      <h2 style={mySty}>About Us</h2>
     <div class="accordion" id="accordionExample">
   <div class="accordion-item">
-    <h2 class="accordion-header">
+    <h2 class="accordion-header" style={mySty}>
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style={mySty}>
         Accordion Item #1
       </button>

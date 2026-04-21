@@ -4,26 +4,24 @@ export default function NavBar(props) {
   return (
     <>
     <div  >
-        <nav className="navbar navbar-expand-lg">
-  <div className="container-fluid"  style={{ backgroundColor: "#444", }}>
-    <a className="navbar-brand" href="/" style={{color:"white"}}>{props.title}</a>
+        <nav className="navbar navbar-expand-lg" style={{marginTop:0,height:55,backgroundColor: "#444", }}>
+  <div className="container-fluid"  style={{marginTop:0,backgroundColor: "#444", }}>
+    <a className="navbar-brand" href="/" style={{color:"white"}}><ion-icon name="logo-deviantart"></ion-icon>{props.title}</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent" >
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/" style={{color:"white"}}>Home</a>
+          <a className="nav-link active" aria-current="page" href="/" style={{color:"white"}}><ion-icon className="mx-2" name="home"></ion-icon>Home</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/About"style={{color:"white"}}>About</a>
+          <a className="nav-link" href="/About"style={{color:"white"}}><ion-icon className='mx-1'name="qr-code-sharp"></ion-icon>About</a>
         </li>
        
+        
         <li className="nav-item">
-          <a className="nav-link" href="/CalenderApp" style={{color:"white"}}>To Do</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/TextBox" style={{color:"white"}}>Text Analyzer</a>
+          <a className="nav-link" href="/TextBox" style={{color:"white"}}><ion-icon className="mx-1" name="document-text-outline"></ion-icon>Text Analyzer</a>
         </li>
       </ul>
       <form className="d-flex" role="search">

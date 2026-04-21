@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { EventContext } from "./EventContext.jsx";
 import Calendar from 'react-calendar'
 import './style.css'
+
 import Calender from './Calender';
 
 
@@ -51,7 +52,7 @@ const[Time,setTime]=useState();
         </li>
         
          <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/Alert" style={{color:"white"}} ><ion-icon className="mx-2"name="alert-circle-outline"></ion-icon>Alert</a>
+          <a className="nav-link active" aria-current="page" href="/Alert" style={{color:"white"}} ><ion-icon className="mx-2" name="clipboard-outline"></ion-icon>Notes</a>
         </li>
 
          <li className="nav-item">
@@ -59,12 +60,10 @@ const[Time,setTime]=useState();
         </li>
       </ul>
     </div>
-    <div className="container">
-
-    </div>
+  
         <Calendar  onClickDay={(date)=>{setSelectDate(date.toLocaleDateString() );}} />
 
-      <div className='card'>
+      <div className='cards'>
         <h4>Events</h4>
   {EventCard.map((eve, index) => (
     <div className="card-body" key={index}>
@@ -96,7 +95,7 @@ const[Time,setTime]=useState();
   </div>
   <div class="col-12">
     <label for="inputCity" class="form-label">Time</label>
-    <input type="time" class="form-control"  placeholder='Enter time' onChange={(e)=>{setTime(e.target.value)}}/>
+    <input type="time" class="form-control "  placeholder='Enter time' onChange={(e)=>{setTime(e.target.value)}}/>
   </div>
  
   <div class="col-md-12">

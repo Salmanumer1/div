@@ -1,0 +1,143 @@
+.card{
+display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1269px;     
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1) !important;
+
+  margin-top: 20px;
+   height: calc(100vh - 650px);
+  overflow-y: auto;
+}
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* PAGE BACKGROUND */
+body {
+  background: linear-gradient(135deg, #f5f7fa, #e4ecf7);
+}
+
+/* MAIN CONTAINER */
+/* .container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+} */
+
+/* TITLE */
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* LABELS */
+label h5 {
+  font-size: 16px;
+  color: #34495e;
+  margin-bottom: 6px;
+}
+
+/* INPUTS & TEXTAREA */
+.form-control {
+  border-radius: 10px !important;
+  padding: 12px;
+  border: 1px solid #dcdde1;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+/* FOCUS EFFECT */
+.form-control:focus {
+  border-color: #f1c40f;
+  box-shadow: 0 0 8px rgba(241, 196, 15, 0.3);
+  outline: none;
+}
+
+/* TEXTAREA SPECIFIC */
+textarea {
+  resize: none;
+}
+
+/* BUTTON */
+button.btn-warning {
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* BUTTON HOVER */
+button.btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(243, 156, 18, 0.4);
+}
+
+/* EVENTS SECTION TITLE */
+.card h4 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* EVENT ITEM */
+.card-body {
+  background: #f9fbfd;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border-left: 5px solid #f1c40f;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+
+/* HOVER EFFECT ON EVENT */
+.card-body:hover {
+  transform: scale(1.01);
+  background: #f4f8fc;
+}
+
+/* EVENT TITLE */
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* EVENT TEXT */
+.card-text {
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+/* DELETE BUTTON INSIDE CARD */
+.card-body button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  button.btn-warning {
+    width: 100% !important;
+  }
+}

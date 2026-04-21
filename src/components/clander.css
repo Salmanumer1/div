@@ -1,0 +1,12 @@
+/* MARKED DATE STYLE */
+.marked-date {
+  background: #f1c40f !important;
+  color: black !important;
+  border-radius: 6px;
+}
+
+/* HOVER (optional better UX) */
+.react-calendar__tile:hover {
+  background: #ffeaa7 !important;
+  border-radius: 6px;
+}
