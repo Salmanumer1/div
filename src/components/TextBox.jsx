@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+
 const TextBox=(props)=>{
   const [text,setText]=useState("");
   const[words,setWords]=useState(0);
@@ -182,8 +183,8 @@ const TextBox=(props)=>{
 
 
 
-<button className="btn btn-success my-3" onClick={cal}>Calculate Summary Words</button>
-<p className="my-3" style={{ backgroundColor: "Pink", color: "black",width:"16%" }}>Words for Summary are {words}</p>
+<button className="btn btn-warning my-3" onClick={cal}>Calculate Summary Words</button>
+<p className="my-3" style={{ backgroundColor: "Pink", color: "black",width:"36%" }}>Words for Summary are {words}</p>
 </div>
 
 </div>

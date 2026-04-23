@@ -12,14 +12,17 @@ import 'react-calendar/dist/Calendar.css';
 
 
 export default function Home() {
- 
+   
 const [EventName, setEventName]=useState("");
 const { EventCard, setEventCard } = useContext(EventContext);
 const[selectDate,setSelectDate]=useState();
+const[notes,setNotes]=useState();
 const[Time,setTime]=useState();
-
+const handleOnChange=(e)=>{
+  setNotes(e.target.value);
+}
  const EventCardRef = useRef([]);
-
+const cardRef=useRef([]);
   useEffect(() => {
     EventCardRef.current = EventCard;
   }, [EventCard]);
@@ -45,6 +48,8 @@ const[Time,setTime]=useState();
 
   return (
   <div className="container">
+  
+
     <div className="right-panel">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
@@ -66,9 +71,10 @@ const[Time,setTime]=useState();
       <div className='cards'>
         <h4>Events</h4>
   {EventCard.map((eve, index) => (
-    <div className="card-body" key={index}>
+    <div className="card-body" key={index} cardRef={el=>cardRef.current[index]=el}>
       <h5 className="card-title">{eve.name}</h5>
-      <p className="card-text">{eve.name} is on {selectDate} and {eve.time}</p>
+      <p className="card-text">{eve.name} is on {eve.date} and {eve.time}</p>
+      
       <button href="#" className="btn btn-warning" onClick={() => {
   setEventCard(prev => prev.filter((_, i) => i !== index))}}>Delete</button>
  
@@ -97,15 +103,18 @@ const[Time,setTime]=useState();
     <label for="inputCity" class="form-label">Time</label>
     <input type="time" class="form-control "  placeholder='Enter time' onChange={(e)=>{setTime(e.target.value)}}/>
   </div>
+   <label for="inputCity" class="form-label my-3">Enter Notes</label>
+<textarea className="form-control  bg-warning-border-subtle"  onChange={handleOnChange} id="Mybox" rows="3"></textarea>
  
   <div class="col-md-12">
     <button type="button"class="btn btn-warning" onClick={() => {
   const newEvent = {
     id: Date.now(),
     name: EventName,
-    date: selectDate,
+    date: new Date(selectDate).toDateString(),
     time: Time,
-    triggered: false
+    triggered: false,
+    note:notes
   };
 
   setEventCard(prev => {

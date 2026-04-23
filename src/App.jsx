@@ -9,10 +9,12 @@ import Calender from "./components/Calender.jsx";
 import Alert from "./components/Alert.jsx";
 
 
+
 function App() {
   return (
-       <EventProvider>
+        <EventProvider> 
     <BrowserRouter>
+  
       <NavBar title="Optinex"/>
       <div className="container my-3">
         <Routes>
@@ -25,8 +27,10 @@ function App() {
           <Route path='/alert' element={<Alert/>}/>
         </Routes>
       </div>
+    
     </BrowserRouter>
-    </EventProvider>
+        </EventProvider>
+  
   );
 }
 
