@@ -71,7 +71,7 @@ const cardRef=useRef([]);
       <div className='cards'>
         <h4>Events</h4>
   {EventCard.map((eve, index) => (
-    <div className="card-body" key={index} cardRef={el=>cardRef.current[index]=el}>
+    <div className="card-body" key={index} >
       <h5 className="card-title">{eve.name}</h5>
       <p className="card-text">{eve.name} is on {eve.date} and {eve.time}</p>
       
